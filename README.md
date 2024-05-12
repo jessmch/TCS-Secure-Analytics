@@ -17,15 +17,9 @@ Installing PIP
 ```
 sudo apt-get install wget
 wget https://bootstrap.pypa.io/get-pip.py
-sudo python3 get-pip.py
+sudo python3 get-pip.py --break-system-packages
 ```
-In case the above doesn't work, you can always run pip using these commands
-```
-python3 -m venv .venv
-source .venv/bin/activate
-```
-Then run this to install
-`python3 -m pip install [what you want to install here]`
+Make sure that all pip installations end with `--break-system-packages`
 
 ### On AWS
 Installing Python
@@ -38,7 +32,15 @@ Installing PIP
 curl -O https://bootstrap.pypa.io/get-pip.py
 sudo python3 get-pip.py 
 ```
-
+## Installing Git
+### On AWS
+```
+sudo yum install git
+```
+### On Google Cloud
+```
+sudo apt -get install git
+```
 ## Installing the Required Libraries
 ### Cryptopgrahy
 `pip install cryptography`
@@ -50,6 +52,7 @@ pip install pandasai
 ### Langchain
 ```
 pip install langchain
+pip install langchain_experimental
 ```
 ### Ollamas
 ```
@@ -58,3 +61,26 @@ ollamas pull mistral
 ```
 To run the mistral model, run
 `ollamas run mistral`
+Then press CTRL+D to suspend the process while keeping the model running
+### Retrieving the Datasets
+```
+pip install gdown
+
+# fraudTest.csv
+gdown 19eVy7Sb8f8j2QygAHUBRNHTA3H-EHJZl
+
+# fraudTrain.csv
+gdown 1GLpLfEzmIAUbIAIPabJpIH_Aw0PI4gHo
+```
+### For the memory dump attack
+#### For Google Cloud
+`sudo apt-get install binutils`
+`sudo apt-get install gdb`
+`sudo apt-get install tmux`
+
+#### For AWS
+`sudo yum install binutils`
+`sudo yum install gdb`
+`sudo yum install tmux`
+
+If the permission is denied while running the memory dump script, run `chmod +x mem_dump.sh`

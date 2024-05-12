@@ -12,7 +12,7 @@ if __name__ == "__main__":
 
 
     message = input("Enter prompt: ") 
-    while message.lower().strip() != 'end': # Typing "end" will close our connection and end our program
+    while message.lower().strip() != 'exit': # Typing "end" will close our connection and end our program
        
         print(sdf.chat(message))
 

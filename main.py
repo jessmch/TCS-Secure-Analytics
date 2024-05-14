@@ -11,7 +11,7 @@ if __name__ == "__main__":
     df = pd.read_csv('fraudTrain.csv') 
     # Drop columns that are unneccesary
     df.drop(columns=['Unnamed: 0','first', 'last', 'gender', 'street', 'city', 'state', 'zip', 'dob', 'trans_num','trans_date_trans_time'],inplace=True)
-    df.dropna(ignore_index=True) # Drop all rows that have missing values
+    df.dropna() # Drop all rows that have missing values
 
     llm = Ollama(model="mistral")  
     sdf = SmartDataframe(df, config={"llm": llm})
@@ -35,9 +35,9 @@ if __name__ == "__main__":
         elif(message[0:4].lower() == 'ask '):
             start_time = time.time()
             response = sdf.chat(message[4:])
-            token = f.encrypt(response)
+            token = f.encrypt(response.encode())
             print(response)
-            print(f.decrypt(token))
+            print(f.decrypt(token).decode())
             print("Response time: %s seconds" % (time.time() - start_time))
         elif(message[0:7].lower() == 'submit '):
             print(message[7:])

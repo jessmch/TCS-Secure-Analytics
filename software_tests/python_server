@@ -25,6 +25,4 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as srv:
                 break
             connection.sendall(rec_msg[::-1].encode())
 
-        print("Client disconnected")
-~                                                                                                              
-~                                                   
+        print("Client disconnected")                                                   

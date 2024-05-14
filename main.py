@@ -26,6 +26,7 @@ if __name__ == "__main__":
     message = input("Enter prompt: ") 
     while message.lower().strip() not in ['exit', 'end', 'quit', 'stop']: # Stop words
        
+        start_time = time.time()
         if(message.lower().strip() == 'help'):
             print("exit, end, quit, or stop - terminates the program")
             print('transaction - enters a transaction')
@@ -33,18 +34,25 @@ if __name__ == "__main__":
             print("ask - ask the AI a question")
             print("print - prints legitimate transactions")
         elif(message[0:4].lower() == 'ask '):
-            start_time = time.time()
-            response = sdf.chat(message[4:])
-            token = f.encrypt(response.encode())
-            print(response)
+            response = message[4:]
+            #response = sdf.chat(message[4:])
+
+            # Encrypt our responses
+            token = f.encrypt(str(response).encode())
+
+            # Save our responses to a file
+            #f = open('responses.txt', 'a')
+            #f.write()
+            #f.close()
+
             print(f.decrypt(token).decode())
-            print("Response time: %s seconds" % (time.time() - start_time))
         elif(message[0:7].lower() == 'submit '):
             print(message[7:])
         elif(message[0:11].lower() == 'transaction'):
             print(message[11:])
         else:
             print("Unkwown command. Type 'help' for a list of commands." )
+        print("Response time: %s seconds" % (time.time() - start_time))
 
         message = input("Enter prompt: ") 
     print("Terminating program")

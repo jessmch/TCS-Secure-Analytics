@@ -3,10 +3,12 @@
 from langchain_community.llms import Ollama
 import pandas as pd
 from pandasai import SmartDataframe
+from cryptography.fernet import Fernet
+import time
 
 
 if __name__ == "__main__":
-    df = pd.read_csv('archive\\fraudTrain.csv') 
+    df = pd.read_csv('fraudTrain.csv') 
     # Drop columns that are unneccesary
     df.drop(columns=['Unnamed: 0','first', 'last', 'gender', 'street', 'city', 'state', 'zip', 'dob', 'trans_num','trans_date_trans_time'],inplace=True)
     df.dropna(ignore_index=True) # Drop all rows that have missing values
@@ -16,6 +18,10 @@ if __name__ == "__main__":
 
     submitted_transactions = []
     valid_transactions = []
+
+    with open("dummy_key.txt", "rb") as key_file:
+        key = key_file.read()
+    f = Fernet(key)
 
     message = input("Enter prompt: ") 
     while message.lower().strip() not in ['exit', 'end', 'quit', 'stop']: # Stop words
@@ -27,7 +33,12 @@ if __name__ == "__main__":
             print("ask - ask the AI a question")
             print("print - prints legitimate transactions")
         elif(message[0:4].lower() == 'ask '):
-            print(sdf.chat(message[4:]))
+            start_time = time.time()
+            response = sdf.chat(message[4:])
+            token = f.encrypt(response)
+            print(response)
+            print(f.decrypt(token))
+            print("Response time: %s seconds" % (time.time() - start_time))
         elif(message[0:7].lower() == 'submit '):
             print(message[7:])
         elif(message[0:11].lower() == 'transaction'):

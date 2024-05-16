@@ -1,5 +1,5 @@
 #from langchain.agents.agent_types import AgentType
-#from langchain_experimental.agents.agent_toolkits import create_pandas_dataframe_agent
+from langchain_experimental.agents.agent_toolkits import create_pandas_dataframe_agent
 from langchain_community.llms import Ollama
 import pandas as pd
 from pandasai import SmartDataframe
@@ -10,7 +10,7 @@ import time
 if __name__ == "__main__":
     df = pd.read_csv('fraudTrain.csv') 
     # Drop columns that are unneccesary
-    df.drop(columns=['Unnamed: 0','first', 'last', 'gender', 'street', 'city', 'state', 'zip', 'dob', 'trans_num','trans_date_trans_time'],inplace=True)
+    df.drop(columns=['lat', 'long', 'city_pop', 'job', 'unix_time', 'merch_lat', 'merch_long', 'Unnamed: 0','first', 'last', 'gender', 'street', 'state', 'zip', 'dob', 'trans_num','trans_date_trans_time'],inplace=True)
     df.dropna() # Drop all rows that have missing values
 
     llm = Ollama(model="mistral")  
@@ -46,10 +46,34 @@ if __name__ == "__main__":
             #f.close()
 
             print(f.decrypt(token).decode())
-        elif(message[0:7].lower() == 'submit '):
+        elif(message.lower().strip() == 'enter transaction'):
+            transaction_info = dict.fromkeys(df.columns)
+            info = input('Enter credit card number: ')
+            transaction_info['cc_num'] = info
+            info = input('Enter name: ')
+            transaction_info['merchant'] = info
+            info = input('Enter reason of purchase: ')
+            transaction_info['category'] = info
+            info = input('Enter the amount: ')
+            transaction_info['amt'] = info
+            info = input('Enter the city: ')
+            transaction_info['city'] = info
+            submitted_transactions.append(transaction_info)
             print(message[7:])
-        elif(message[0:11].lower() == 'transaction'):
-            print(message[11:])
+        elif(message.lower().strip() == 'transactions'):
+            for transaction in submitted_transactions:
+                print(f"""Credit Card: {transaction['cc_num']}
+Merchant Name: {transaction['merchant']}
+Category: {transaction['category']}
+Transaction Amount: {transaction['amt']}
+City of Transaction: {transaction['city']}""")
+                print()
+        elif(message.lower().strip() == 'validate transactions'):
+            response = sdf.chat(f"Is {submitted_transactions[0]} a valid transaction?")
+            print(response)
+        elif(message.lower().strip() == 'test'):
+            print(df.head(1))
+            print(sdf.chat(f"is {df.head(1)} a valid transaction?"))
         else:
             print("Unkwown command. Type 'help' for a list of commands." )
         print("Response time: %s seconds" % (time.time() - start_time))

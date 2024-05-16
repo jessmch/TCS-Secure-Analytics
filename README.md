@@ -72,6 +72,26 @@ gdown 19eVy7Sb8f8j2QygAHUBRNHTA3H-EHJZl
 # fraudTrain.csv
 gdown 1GLpLfEzmIAUbIAIPabJpIH_Aw0PI4gHo
 ```
+### Setting up the Nitro Enclave
+#### Download dependencies
+```
+sudo yum -y install aws-nitro-enclaves-cli
+sudo yum -y install aws-nitro-enclaves-cli-devel
+```
+Set up Docker settings
+```
+# username is the username you used to log into the ssh
+sudo usermod -aG ne username
+sudo usermod -aG docker username
+```
+Verify the Nitro Enclave installation
+`nitro-cli --version`
+Allocate Resources to the Enclave
+`sudo systemctl enable --now nitro-enclaves-allocator.service`
+You may check this file to change the default allocation settings
+`/etc/nitro_enclaves/allocator.yaml`
+#### Setting up the Enclave
+
 ### For the memory dump attack
 #### For Google Cloud
 `sudo apt-get install binutils`

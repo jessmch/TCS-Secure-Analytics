@@ -444,3 +444,583 @@ result = {'type': 'number', 'value': num_frauds}
 2024-05-02 15:19:59 [INFO] Executing Step 7: ResultValidation
 2024-05-02 15:19:59 [INFO] Answer: {'type': 'number', 'value': 7506}
 2024-05-02 15:19:59 [INFO] Executing Step 8: ResultParsing
+2024-05-14 20:36:55 [INFO] Question: Is {'cc_num': '1234123412341234', 'merchant': 'billy johnson', 'category': 'food', 'amt': '10000', 'city': 'new york', 'is_fraud': None} a valid transaction?
+2024-05-14 20:36:57 [INFO] Running PandasAI with langchain_ollama-llm LLM...
+2024-05-14 20:36:57 [INFO] Prompt ID: 2a807634-c11d-4bbc-8661-5d6948035c41
+2024-05-14 20:36:57 [INFO] Executing Pipeline: GenerateChatPipeline
+2024-05-14 20:36:58 [INFO] Executing Step 0: ValidatePipelineInput
+2024-05-14 20:36:58 [INFO] Executing Step 1: CacheLookup
+2024-05-14 20:36:58 [INFO] Executing Step 2: PromptGeneration
+2024-05-14 20:36:58 [INFO] Using prompt: <dataframe>
+dfs[0]:1296675x6
+cc_num,merchant,category,amt,city,is_fraud
+9519339508,"fraud_Runolfsdottir, Mueller and Hand",entertainment,278.49,Mount Vernon,1
+1503142128,fraud_Johns-Hoeger,travel,31.05,Port Gibson,0
+1455844212,fraud_Romaguera Ltd,shopping_net,534.18,Smackover,0
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Is {'cc_num': '1234123412341234', 'merchant': 'billy johnson', 'category': 'food', 'amt': '10000', 'city': 'new york', 'is_fraud': None} a valid transaction?
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2024-05-14 20:36:58 [INFO] Executing Step 3: CodeGenerator
+2024-05-14 20:44:10 [INFO] Prompt used:
+            
+<dataframe>
+dfs[0]:1296675x6
+cc_num,merchant,category,amt,city,is_fraud
+9519339508,"fraud_Runolfsdottir, Mueller and Hand",entertainment,278.49,Mount Vernon,1
+1503142128,fraud_Johns-Hoeger,travel,31.05,Port Gibson,0
+1455844212,fraud_Romaguera Ltd,shopping_net,534.18,Smackover,0
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Is {'cc_num': '1234123412341234', 'merchant': 'billy johnson', 'category': 'food', 'amt': '10000', 'city': 'new york', 'is_fraud': None} a valid transaction?
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2024-05-14 20:44:10 [INFO] Code generated:
+            ```
+            # TODO: import the required dependencies
+import pandas as pd
+import numpy as np
+
+# Write code here
+
+# Filter transaction based on given values
+new_transaction = {'cc_num': '1234123412341234', 'merchant': 'billy johnson', 'category': 'food', 'amt': 10000, 'city': 'new york', 'is_fraud': None}
+filtered_transaction = dfs[0].loc[(dfs[0]['cc_num'] == new_transaction['cc_num']) & (dfs[0]['merchant'] == new_transaction['merchant']) & (dfs[0]['category'] == new_transaction['category']) & (dfs[0]['city'] == new_transaction['city'])]
+
+# Check if transaction exists in the dataframe
+if len(filtered_transaction) > 0:
+    print("Transaction is valid.")
+else:
+    print("Transaction is not valid.")
+    
+# Declare result var: 
+result = { "type": "string", "value": "Valid or Invalid transaction?"}
+if len(filtered_transaction) > 0 and new_transaction['is_fraud'] is None:
+    result = { "type": "string", "value": "Transaction is valid."}
+else:
+    result = { "type": "string", "value": "Transaction is not valid."}
+            ```
+            
+2024-05-14 20:44:10 [INFO] Executing Step 4: CachePopulation
+2024-05-14 20:44:11 [INFO] Executing Step 5: CodeCleaning
+2024-05-14 20:44:11 [INFO] 
+Code running:
+```
+new_transaction = {'cc_num': '1234123412341234', 'merchant': 'billy johnson', 'category': 'food', 'amt': 10000, 'city': 'new york', 'is_fraud': None}
+filtered_transaction = dfs[0].loc[(dfs[0]['cc_num'] == new_transaction['cc_num']) & (dfs[0]['merchant'] == new_transaction['merchant']) & (dfs[0]['category'] == new_transaction['category']) & (dfs[0]['city'] == new_transaction['city'])]
+if len(filtered_transaction) > 0:
+    print('Transaction is valid.')
+else:
+    print('Transaction is not valid.')
+result = {'type': 'string', 'value': 'Valid or Invalid transaction?'}
+if len(filtered_transaction) > 0 and new_transaction['is_fraud'] is None:
+    result = {'type': 'string', 'value': 'Transaction is valid.'}
+else:
+    result = {'type': 'string', 'value': 'Transaction is not valid.'}
+        ```
+2024-05-14 20:44:11 [INFO] Executing Step 6: CodeExecution
+2024-05-14 20:44:12 [INFO] Executing Step 7: ResultValidation
+2024-05-14 20:44:12 [INFO] Answer: {'type': 'string', 'value': 'Transaction is not valid.'}
+2024-05-14 20:44:12 [INFO] Executing Step 8: ResultParsing
+2024-05-14 22:18:30 [INFO] Question: is              cc_num                    merchant  category   amt            city  is_fraud
+0  2703186189652095  fraud_Rippin, Kub and Mann  misc_net  4.97  Moravian Falls         0 a valid transaction?
+2024-05-14 22:18:31 [INFO] Running PandasAI with langchain_ollama-llm LLM...
+2024-05-14 22:18:31 [INFO] Prompt ID: c649fc8d-c6b1-4fca-a0e1-0a4ac999d2b8
+2024-05-14 22:18:31 [INFO] Executing Pipeline: GenerateChatPipeline
+2024-05-14 22:18:32 [INFO] Executing Step 0: ValidatePipelineInput
+2024-05-14 22:18:32 [INFO] Executing Step 1: CacheLookup
+2024-05-14 22:18:32 [INFO] Executing Step 2: PromptGeneration
+2024-05-14 22:18:32 [INFO] Using prompt: <dataframe>
+dfs[0]:1296675x6
+cc_num,merchant,category,amt,city,is_fraud
+1631-9926-2771-8220,fraud_Botsford Ltd,travel,610.32,Irvine,1
+7371-9472-6867-9412,"fraud_Harris, Gusikowski and Heaney",grocery_pos,189.61,Whittemore,1
+7354 3373 4659 3303,"fraud_Baumbach, Strosin and Nicolas",kids_pets,148.67,Lake Jackson,0
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ is              cc_num                    merchant  category   amt            city  is_fraud
+0  2703186189652095  fraud_Rippin, Kub and Mann  misc_net  4.97  Moravian Falls         0 a valid transaction?
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2024-05-14 22:18:32 [INFO] Executing Step 3: CodeGenerator
+2024-05-14 22:27:24 [INFO] Prompt used:
+            
+<dataframe>
+dfs[0]:1296675x6
+cc_num,merchant,category,amt,city,is_fraud
+1631-9926-2771-8220,fraud_Botsford Ltd,travel,610.32,Irvine,1
+7371-9472-6867-9412,"fraud_Harris, Gusikowski and Heaney",grocery_pos,189.61,Whittemore,1
+7354 3373 4659 3303,"fraud_Baumbach, Strosin and Nicolas",kids_pets,148.67,Lake Jackson,0
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ is              cc_num                    merchant  category   amt            city  is_fraud
+0  2703186189652095  fraud_Rippin, Kub and Mann  misc_net  4.97  Moravian Falls         0 a valid transaction?
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2024-05-14 22:27:24 [INFO] Code generated:
+            ```
+            # Import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Filter dataframe to check for fraudulent transactions
+fraud_df = dfs[0][dfs[0]['is_fraud'] == 1]
+
+# Generate a summary of fraudulent transactions
+num_fraud = len(fraud_df)
+total_amount_fraud = fraud_df['amt'].sum()
+avg_amount_fraud = total_amount_fraud / num_fraud if num_fraud > 0 else 0
+
+# Print a message about the number of fraudulent transactions and their total amount
+result = { "type": "string", "value": f"There are {num_fraud} fraudulent transactions with a total amount of ${total_amount_fraud:.2f}." }
+
+if num_fraud > 0:
+    # Plot a bar chart showing the distribution of fraud amounts
+    import matplotlib.pyplot as plt
+
+    plt.bar(fraud_df['category'].unique(), fraud_df.groupby('category')['amt'].sum())
+    plt.title("Fraudulent Transactions by Category")
+    plt.xlabel("Category")
+    plt.ylabel("Total Amount")
+    plt.savefig("fraud_chart.png")
+    result = { "type": "plot", "value": "fraud_chart.png" }
+
+print(result)
+            ```
+            
+2024-05-14 22:27:24 [INFO] Executing Step 4: CachePopulation
+2024-05-14 22:27:24 [INFO] Executing Step 5: CodeCleaning
+2024-05-14 22:27:24 [INFO] Saving charts to C:\Users\huule\Desktop\School\cs180\TCS-Secure-Analytics\exports\charts\temp_chart.png
+2024-05-14 22:27:25 [INFO] 
+Code running:
+```
+fraud_df = dfs[0][dfs[0]['is_fraud'] == 1]
+num_fraud = len(fraud_df)
+total_amount_fraud = fraud_df['amt'].sum()
+avg_amount_fraud = total_amount_fraud / num_fraud if num_fraud > 0 else 0
+result = {'type': 'string', 'value': f'There are {num_fraud} fraudulent transactions with a total amount of ${total_amount_fraud:.2f}.'}
+if num_fraud > 0:
+    import matplotlib.pyplot as plt
+    plt.bar(fraud_df['category'].unique(), fraud_df.groupby('category')['amt'].sum())
+    plt.title('Fraudulent Transactions by Category')
+    plt.xlabel('Category')
+    plt.ylabel('Total Amount')
+    plt.savefig('C:/Users/huule/Desktop/School/cs180/TCS-Secure-Analytics/exports/charts/temp_chart.png')
+    result = {'type': 'plot', 'value': 'C:/Users/huule/Desktop/School/cs180/TCS-Secure-Analytics/exports/charts/temp_chart.png'}
+print(result)
+        ```
+2024-05-14 22:27:25 [INFO] Executing Step 6: CodeExecution
+2024-05-14 22:27:26 [ERROR] Failed with error: Traceback (most recent call last):
+  File "C:\Users\huule\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\huule\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 7, in <module>
+ImportError: __import__ not found
+
+2024-05-14 22:27:26 [WARNING] Failed to execute code retrying with a correction framework [retry number: 1]
+2024-05-14 22:27:26 [INFO] Executing Pipeline: ErrorCorrectionPipeline
+2024-05-14 22:27:26 [INFO] Executing Step 0: ErrorPromptGeneration
+2024-05-14 22:27:26 [INFO] Using prompt: <dataframe>
+dfs[0]:1296675x6
+cc_num,merchant,category,amt,city,is_fraud
+1631-9926-2771-8220,fraud_Botsford Ltd,travel,610.32,Irvine,1
+7371-9472-6867-9412,"fraud_Harris, Gusikowski and Heaney",grocery_pos,189.61,Whittemore,1
+7354 3373 4659 3303,"fraud_Baumbach, Strosin and Nicolas",kids_pets,148.67,Lake Jackson,0
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ is              cc_num                    merchant  category   amt            city  is_fraud
+0  2703186189652095  fraud_Rippin, Kub and Mann  misc_net  4.97  Moravian Falls         0 a valid transaction?
+
+You generated this python code:
+fraud_df = dfs[0][dfs[0]['is_fraud'] == 1]
+num_fraud = len(fraud_df)
+total_amount_fraud = fraud_df['amt'].sum()
+avg_amount_fraud = total_amount_fraud / num_fraud if num_fraud > 0 else 0
+result = {'type': 'string', 'value': f'There are {num_fraud} fraudulent transactions with a total amount of ${total_amount_fraud:.2f}.'}
+if num_fraud > 0:
+    import matplotlib.pyplot as plt
+    plt.bar(fraud_df['category'].unique(), fraud_df.groupby('category')['amt'].sum())
+    plt.title('Fraudulent Transactions by Category')
+    plt.xlabel('Category')
+    plt.ylabel('Total Amount')
+    plt.savefig('C:/Users/huule/Desktop/School/cs180/TCS-Secure-Analytics/exports/charts/temp_chart.png')
+    result = {'type': 'plot', 'value': 'C:/Users/huule/Desktop/School/cs180/TCS-Secure-Analytics/exports/charts/temp_chart.png'}
+print(result)
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "C:\Users\huule\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\huule\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 7, in <module>
+ImportError: __import__ not found
+
+
+Fix the python code above and return the new python code:
+2024-05-14 22:27:27 [INFO] Executing Step 1: CodeGenerator
+2024-05-14 22:37:59 [INFO] Prompt used:
+            
+<dataframe>
+dfs[0]:1296675x6
+cc_num,merchant,category,amt,city,is_fraud
+1631-9926-2771-8220,fraud_Botsford Ltd,travel,610.32,Irvine,1
+7371-9472-6867-9412,"fraud_Harris, Gusikowski and Heaney",grocery_pos,189.61,Whittemore,1
+7354 3373 4659 3303,"fraud_Baumbach, Strosin and Nicolas",kids_pets,148.67,Lake Jackson,0
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ is              cc_num                    merchant  category   amt            city  is_fraud
+0  2703186189652095  fraud_Rippin, Kub and Mann  misc_net  4.97  Moravian Falls         0 a valid transaction?
+
+You generated this python code:
+fraud_df = dfs[0][dfs[0]['is_fraud'] == 1]
+num_fraud = len(fraud_df)
+total_amount_fraud = fraud_df['amt'].sum()
+avg_amount_fraud = total_amount_fraud / num_fraud if num_fraud > 0 else 0
+result = {'type': 'string', 'value': f'There are {num_fraud} fraudulent transactions with a total amount of ${total_amount_fraud:.2f}.'}
+if num_fraud > 0:
+    import matplotlib.pyplot as plt
+    plt.bar(fraud_df['category'].unique(), fraud_df.groupby('category')['amt'].sum())
+    plt.title('Fraudulent Transactions by Category')
+    plt.xlabel('Category')
+    plt.ylabel('Total Amount')
+    plt.savefig('C:/Users/huule/Desktop/School/cs180/TCS-Secure-Analytics/exports/charts/temp_chart.png')
+    result = {'type': 'plot', 'value': 'C:/Users/huule/Desktop/School/cs180/TCS-Secure-Analytics/exports/charts/temp_chart.png'}
+print(result)
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "C:\Users\huule\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\huule\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 7, in <module>
+ImportError: __import__ not found
+
+
+Fix the python code above and return the new python code:
+            
+2024-05-14 22:37:59 [INFO] Code generated:
+            ```
+            import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Assuming dfs is a list containing only one DataFrame (dfs[0])
+fraud_df = dfs[0][dfs[0]['is_fraud'] == 1]
+num_fraud = len(fraud_df)
+total_amount_fraud = fraud_df['amt'].sum()
+avg_amount_fraud = total_amount_fraud / num_fraud if num_fraud > 0 else 0
+
+result = {'type': 'string', 'value': f'There are {num_fraud} fraudulent transactions with a total amount of ${total_amount_fraud:.2f}.'}
+
+if num_fraud > 0:
+    plt.bar(fraud_df['category'].unique(), fraud_df.groupby('category')['amt'].sum())
+    plt.title('Fraudulent Transactions by Category')
+    plt.xlabel('Category')
+    plt.ylabel('Total Amount')
+    plt.savefig('temp_chart.png')
+    result = {'type': 'plot', 'value': 'temp_chart.png'}
+    plt.close()  # Make sure to close the figure after saving it
+
+print(result)
+            ```
+            
+2024-05-14 22:37:59 [INFO] Executing Step 2: CodeCleaning
+2024-05-14 22:37:59 [INFO] Saving charts to C:\Users\huule\Desktop\School\cs180\TCS-Secure-Analytics\exports\charts\temp_chart.png
+2024-05-14 22:37:59 [INFO] 
+Code running:
+```
+fraud_df = dfs[0][dfs[0]['is_fraud'] == 1]
+num_fraud = len(fraud_df)
+total_amount_fraud = fraud_df['amt'].sum()
+avg_amount_fraud = total_amount_fraud / num_fraud if num_fraud > 0 else 0
+result = {'type': 'string', 'value': f'There are {num_fraud} fraudulent transactions with a total amount of ${total_amount_fraud:.2f}.'}
+if num_fraud > 0:
+    plt.bar(fraud_df['category'].unique(), fraud_df.groupby('category')['amt'].sum())
+    plt.title('Fraudulent Transactions by Category')
+    plt.xlabel('Category')
+    plt.ylabel('Total Amount')
+    plt.savefig('C:/Users/huule/Desktop/School/cs180/TCS-Secure-Analytics/exports/charts/temp_chart.png')
+    result = {'type': 'plot', 'value': 'C:/Users/huule/Desktop/School/cs180/TCS-Secure-Analytics/exports/charts/temp_chart.png'}
+    plt.close()
+print(result)
+        ```
+2024-05-14 22:38:03 [INFO] Executing Step 7: ResultValidation
+2024-05-14 22:38:03 [INFO] Answer: {'type': 'plot', 'value': 'C:/Users/huule/Desktop/School/cs180/TCS-Secure-Analytics/exports/charts/temp_chart.png'}
+2024-05-14 22:38:03 [INFO] Executing Step 8: ResultParsing
+2024-05-15 11:17:52 [INFO] Question: is              cc_num                    merchant  category   amt            city  is_fraud
+0  2703186189652095  fraud_Rippin, Kub and Mann  misc_net  4.97  Moravian Falls         0 a valid transaction?
+2024-05-15 11:17:53 [INFO] Running PandasAI with langchain_ollama-llm LLM...
+2024-05-15 11:17:53 [INFO] Prompt ID: 9a8f39eb-367f-4ce4-b2fa-8088cb0f2ebc
+2024-05-15 11:17:53 [INFO] Executing Pipeline: GenerateChatPipeline
+2024-05-15 11:17:54 [INFO] Executing Step 0: ValidatePipelineInput
+2024-05-15 11:17:54 [INFO] Executing Step 1: CacheLookup
+2024-05-15 11:17:54 [INFO] Using cached response
+2024-05-15 11:17:55 [INFO] Executing Step 2: PromptGeneration
+2024-05-15 11:17:55 [INFO] Executing Step 2: Skipping...
+2024-05-15 11:17:55 [INFO] Executing Step 3: CodeGenerator
+2024-05-15 11:17:55 [INFO] Executing Step 3: Skipping...
+2024-05-15 11:17:55 [INFO] Executing Step 4: CachePopulation
+2024-05-15 11:17:55 [INFO] Executing Step 4: Skipping...
+2024-05-15 11:17:55 [INFO] Executing Step 5: CodeCleaning
+2024-05-15 11:17:55 [INFO] Saving charts to C:\Users\huule\Desktop\School\cs180\TCS-Secure-Analytics\exports\charts\temp_chart.png
+2024-05-15 11:17:55 [INFO] 
+Code running:
+```
+fraud_df = dfs[0][dfs[0]['is_fraud'] == 1]
+num_fraud = len(fraud_df)
+total_amount_fraud = fraud_df['amt'].sum()
+avg_amount_fraud = total_amount_fraud / num_fraud if num_fraud > 0 else 0
+result = {'type': 'string', 'value': f'There are {num_fraud} fraudulent transactions with a total amount of ${total_amount_fraud:.2f}.'}
+if num_fraud > 0:
+    import matplotlib.pyplot as plt
+    plt.bar(fraud_df['category'].unique(), fraud_df.groupby('category')['amt'].sum())
+    plt.title('Fraudulent Transactions by Category')
+    plt.xlabel('Category')
+    plt.ylabel('Total Amount')
+    plt.savefig('C:/Users/huule/Desktop/School/cs180/TCS-Secure-Analytics/exports/charts/temp_chart.png')
+    result = {'type': 'plot', 'value': 'C:/Users/huule/Desktop/School/cs180/TCS-Secure-Analytics/exports/charts/temp_chart.png'}
+print(result)
+        ```
+2024-05-15 11:17:55 [INFO] Executing Step 6: CodeExecution
+2024-05-15 11:17:55 [ERROR] Failed with error: Traceback (most recent call last):
+  File "C:\Users\huule\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\huule\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 7, in <module>
+ImportError: __import__ not found
+
+2024-05-15 11:17:55 [WARNING] Failed to execute code retrying with a correction framework [retry number: 1]
+2024-05-15 11:17:55 [INFO] Executing Pipeline: ErrorCorrectionPipeline
+2024-05-15 11:17:55 [INFO] Executing Step 0: ErrorPromptGeneration
+2024-05-15 11:17:55 [INFO] Using prompt: <dataframe>
+dfs[0]:1296675x6
+cc_num,merchant,category,amt,city,is_fraud
+38797410705641,fraud_Mraz-Herzog,travel,553.25,Schaefferstown,1
+213102873001603,fraud_Mosciski Group,home,115.31,Cross Plains,1
+630423337322,fraud_Spinka-Welch,gas_transport,972.58,Valdosta,0
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ is              cc_num                    merchant  category   amt            city  is_fraud
+0  2703186189652095  fraud_Rippin, Kub and Mann  misc_net  4.97  Moravian Falls         0 a valid transaction?
+
+You generated this python code:
+fraud_df = dfs[0][dfs[0]['is_fraud'] == 1]
+num_fraud = len(fraud_df)
+total_amount_fraud = fraud_df['amt'].sum()
+avg_amount_fraud = total_amount_fraud / num_fraud if num_fraud > 0 else 0
+result = {'type': 'string', 'value': f'There are {num_fraud} fraudulent transactions with a total amount of ${total_amount_fraud:.2f}.'}
+if num_fraud > 0:
+    import matplotlib.pyplot as plt
+    plt.bar(fraud_df['category'].unique(), fraud_df.groupby('category')['amt'].sum())
+    plt.title('Fraudulent Transactions by Category')
+    plt.xlabel('Category')
+    plt.ylabel('Total Amount')
+    plt.savefig('C:/Users/huule/Desktop/School/cs180/TCS-Secure-Analytics/exports/charts/temp_chart.png')
+    result = {'type': 'plot', 'value': 'C:/Users/huule/Desktop/School/cs180/TCS-Secure-Analytics/exports/charts/temp_chart.png'}
+print(result)
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "C:\Users\huule\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\huule\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 7, in <module>
+ImportError: __import__ not found
+
+
+Fix the python code above and return the new python code:
+2024-05-15 11:17:55 [INFO] Executing Step 1: CodeGenerator
+2024-05-15 11:33:31 [INFO] Prompt used:
+            
+<dataframe>
+dfs[0]:1296675x6
+cc_num,merchant,category,amt,city,is_fraud
+38797410705641,fraud_Mraz-Herzog,travel,553.25,Schaefferstown,1
+213102873001603,fraud_Mosciski Group,home,115.31,Cross Plains,1
+630423337322,fraud_Spinka-Welch,gas_transport,972.58,Valdosta,0
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ is              cc_num                    merchant  category   amt            city  is_fraud
+0  2703186189652095  fraud_Rippin, Kub and Mann  misc_net  4.97  Moravian Falls         0 a valid transaction?
+
+You generated this python code:
+fraud_df = dfs[0][dfs[0]['is_fraud'] == 1]
+num_fraud = len(fraud_df)
+total_amount_fraud = fraud_df['amt'].sum()
+avg_amount_fraud = total_amount_fraud / num_fraud if num_fraud > 0 else 0
+result = {'type': 'string', 'value': f'There are {num_fraud} fraudulent transactions with a total amount of ${total_amount_fraud:.2f}.'}
+if num_fraud > 0:
+    import matplotlib.pyplot as plt
+    plt.bar(fraud_df['category'].unique(), fraud_df.groupby('category')['amt'].sum())
+    plt.title('Fraudulent Transactions by Category')
+    plt.xlabel('Category')
+    plt.ylabel('Total Amount')
+    plt.savefig('C:/Users/huule/Desktop/School/cs180/TCS-Secure-Analytics/exports/charts/temp_chart.png')
+    result = {'type': 'plot', 'value': 'C:/Users/huule/Desktop/School/cs180/TCS-Secure-Analytics/exports/charts/temp_chart.png'}
+print(result)
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "C:\Users\huule\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\huule\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 7, in <module>
+ImportError: __import__ not found
+
+
+Fix the python code above and return the new python code:
+            
+2024-05-15 11:33:32 [INFO] Code generated:
+            ```
+            import pandas as pd
+%matplotlib inline
+
+fraud_df = dfs[0][dfs[0]['is_fraud'] == 1]
+num_fraud = len(fraud_df)
+total_amount_fraud = fraud_df['amt'].sum()
+avg_amount_fraud = total_amount_fraud / num_fraud if num_fraud > 0 else 0
+
+plt.bar(fraud_df['category'].unique(), fraud_df.groupby('category')['amt'].sum())
+plt.title('Fraudulent Transactions by Category')
+plt.xlabel('Category')
+plt.ylabel('Total Amount')
+
+result = {'type': 'string', 'value': f'There are {num_fraud} fraudulent transactions with a total amount of ${total_amount_fraud:.2f}.'}
+if num_fraud > 0:
+    result['type'] = 'plot'
+    result['value'] = {'data': {'x': fraud_df['category'].unique(), 'y': fraud_df.groupby('category')['amt'].sum().values, 'type': 'bar', 'name': 'Fraudulent Transactions'},
+                      'layout': {'title': 'Fraudulent Transactions by Category'}}
+print(result)
+            ```
+            
+2024-05-15 11:33:32 [INFO] Executing Step 2: CodeCleaning
+2024-05-15 11:33:32 [ERROR] Pipeline failed on step 2: invalid syntax (<unknown>, line 2)
+2024-05-15 11:33:32 [ERROR] Pipeline failed on step 6: invalid syntax (<unknown>, line 2)

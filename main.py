@@ -77,7 +77,7 @@ City of Transaction: {transaction['city']}""")
         elif(message.lower().strip() == 'test'):
             print(df.head(1))
             print(sdf.chat(f"is {df.head(1)} a valid transaction?"))
-        elif(message.lower().strip() == 'echo'):
+        elif(message[0:4].lower() == 'echo'):
             response = message[4:]
 
             # Encrypt our responses

@@ -1,5 +1,5 @@
 FROM node:18-alpine
 WORKDIR /app
 COPY . .
-RUN yum install --production
+CMD ["python3 main.py"]
 EXPOSE 3000

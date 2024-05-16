@@ -57,7 +57,7 @@ pip install langchain_experimental
 ### Ollamas
 ```
 curl -fsSL https://ollama.com/install.sh | sh
-ollamas pull mistral
+ollama pull mistral
 ```
 To run the mistral model, run
 `ollamas run mistral`
@@ -86,10 +86,20 @@ sudo usermod -aG docker username
 ```
 Verify the Nitro Enclave installation
 `nitro-cli --version`
+Change the allocation settings for all Enclaves
+`vim /etc/nitro_enclaves/allocator.yaml`
 Allocate Resources to the Enclave
 `sudo systemctl enable --now nitro-enclaves-allocator.service`
 You may check this file to change the default allocation settings
 `/etc/nitro_enclaves/allocator.yaml`
+Start the Docker service and make sure it runs every time the instance starts up
+`sudo systemctl enable --now docker`
+In the directory to create a Docker image run
+`docker build -t tcs-black-box .`
+Build the enclave file
+`sudo nitro-cli build-enclave --docker-uri tcs-black-box:latest --output-file tcs-black-box.eif`
+Run the enclave file
+`sudo nitro-cli run-enclave --cpu-count 2 --memory 512 --enclave-cid 16 --eif-path tcs-black-box.eif --debug-mode`
 #### Setting up the Enclave
 
 ### For the memory dump attack

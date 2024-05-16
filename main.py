@@ -23,7 +23,8 @@ if __name__ == "__main__":
         key = key_file.read()
     f = Fernet(key)
 
-    message = input("Enter prompt: ") 
+    print('Welcome to the TCS Black Box Test!')
+    message = input("Enter a prompt: ") 
     while message.lower().strip() not in ['exit', 'end', 'quit', 'stop']: # Stop words
        
         start_time = time.time()
@@ -34,8 +35,8 @@ if __name__ == "__main__":
             print("ask - ask the AI a question")
             print("print - prints legitimate transactions")
         elif(message[0:4].lower() == 'ask '):
-            response = message[4:]
-            #response = sdf.chat(message[4:])
+            #response = message[4:]
+            response = sdf.chat(message[4:])
 
             # Encrypt our responses
             token = f.encrypt(str(response).encode())
@@ -45,7 +46,7 @@ if __name__ == "__main__":
             #f.write()
             #f.close()
 
-            print(f.decrypt(token).decode())
+            print("response:", f.decrypt(token).decode())
         elif(message.lower().strip() == 'enter transaction'):
             transaction_info = dict.fromkeys(df.columns)
             info = input('Enter credit card number: ')

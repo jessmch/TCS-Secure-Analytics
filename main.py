@@ -30,10 +30,12 @@ if __name__ == "__main__":
         start_time = time.time()
         if(message.lower().strip() == 'help'):
             print("exit, end, quit, or stop - terminates the program")
-            print('transaction - enters a transaction')
-            print('validate - checks to see if any of the transactions are fradulent')
-            print("ask - ask the AI a question")
-            print("print - prints legitimate transactions")
+            print('enter transaction        - enters a transaction')
+            print("transactions             - list entered transactions")
+            print('validate transactions    - checks to see if any of the transactions are fradulent')
+            print("ask                      - ask the AI a question")
+            print("print                    - prints legitimate transactions")
+            print("echo                     - echoes the last message")
         elif(message[0:4].lower() == 'ask '):
             #response = message[4:]
             response = sdf.chat(message[4:])
@@ -75,6 +77,12 @@ City of Transaction: {transaction['city']}""")
         elif(message.lower().strip() == 'test'):
             print(df.head(1))
             print(sdf.chat(f"is {df.head(1)} a valid transaction?"))
+        elif(message.lower().strip() == 'echo'):
+            response = message[4:]
+
+            # Encrypt our responses
+            token = f.encrypt(str(response).encode())
+            print('response:', response, token)
         else:
             print("Unkwown command. Type 'help' for a list of commands." )
         print("Response time: %s seconds" % (time.time() - start_time))

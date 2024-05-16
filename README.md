@@ -72,6 +72,19 @@ gdown 19eVy7Sb8f8j2QygAHUBRNHTA3H-EHJZl
 # fraudTrain.csv
 gdown 1GLpLfEzmIAUbIAIPabJpIH_Aw0PI4gHo
 ```
+### For the memory dump attack
+#### For Google Cloud
+`sudo apt-get install binutils`
+`sudo apt-get install gdb`
+`sudo apt-get install tmux`
+
+#### For AWS
+`sudo yum install binutils`
+`sudo yum install gdb`
+`sudo yum install tmux`
+
+If the permission is denied while running the memory dump script, run `chmod +x mem_dump.sh`
+
 ### Setting up the Nitro Enclave
 #### Download dependencies
 ```
@@ -99,27 +112,28 @@ You may check this file to change the default allocation settings
 `/etc/nitro_enclaves/allocator.yaml`
 Start the Docker service and make sure it runs every time the instance starts up
 `sudo systemctl enable --now docker`
+#### Setting up the Enclave
 In the directory to create a Docker image run
 `sudo docker build -t tcs-black-box .`
 Build the enclave file
 `sudo nitro-cli build-enclave --docker-uri tcs-black-box:latest --output-file tcs-black-box.eif`
 Run the enclave file
 `sudo nitro-cli run-enclave --cpu-count 2 --memory 2428 --enclave-cid 16 --eif-path tcs-black-box.eif --debug-mode`
-#### Setting up the Enclave
 
-### For the memory dump attack
-#### For Google Cloud
-`sudo apt-get install binutils`
-`sudo apt-get install gdb`
-`sudo apt-get install tmux`
-
-#### For AWS
-`sudo yum install binutils`
-`sudo yum install gdb`
-`sudo yum install tmux`
-
-If the permission is denied while running the memory dump script, run `chmod +x mem_dump.sh`
 
 ### Extra Notes
 To remove all Docker images, run
 `docker image prune`
+`docker container prune`
+`docker builder prune`
+
+### For completely wiping out docker space in AWS
+```
+sudo systemctl stop docker
+sudo yum remove docker
+sudo rm -r /var/lib/docker/overlay2
+sudo mkdir /var/lib/docker/overlay2
+sudo yum install -y docker
+sudo service docker start
+sudo usermod -a -G docker ec2-user
+```

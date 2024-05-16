@@ -87,7 +87,12 @@ sudo usermod -aG docker username
 Verify the Nitro Enclave installation
 `nitro-cli --version`
 Change the allocation settings for all Enclaves
-`vim /etc/nitro_enclaves/allocator.yaml`
+```
+sudo chmod 777 /etc/nitro_enclaves/allocator.yaml
+vim /etc/nitro_enclaves/allocator.yaml
+sudo systemctl restart nitro-enclaves-allocator.service
+```
+Change memory_mib to `8000`
 Allocate Resources to the Enclave
 `sudo systemctl enable --now nitro-enclaves-allocator.service`
 You may check this file to change the default allocation settings
@@ -95,11 +100,11 @@ You may check this file to change the default allocation settings
 Start the Docker service and make sure it runs every time the instance starts up
 `sudo systemctl enable --now docker`
 In the directory to create a Docker image run
-`docker build -t tcs-black-box .`
+`sudo docker build -t tcs-black-box .`
 Build the enclave file
 `sudo nitro-cli build-enclave --docker-uri tcs-black-box:latest --output-file tcs-black-box.eif`
 Run the enclave file
-`sudo nitro-cli run-enclave --cpu-count 2 --memory 512 --enclave-cid 16 --eif-path tcs-black-box.eif --debug-mode`
+`sudo nitro-cli run-enclave --cpu-count 2 --memory 2428 --enclave-cid 16 --eif-path tcs-black-box.eif --debug-mode`
 #### Setting up the Enclave
 
 ### For the memory dump attack
@@ -114,3 +119,7 @@ Run the enclave file
 `sudo yum install tmux`
 
 If the permission is denied while running the memory dump script, run `chmod +x mem_dump.sh`
+
+### Extra Notes
+To remove all Docker images, run
+`docker image prune`

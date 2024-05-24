@@ -39,9 +39,11 @@ sudo yum install git
 ```
 ### On Google Cloud
 ```
-sudo apt -get install git
+sudo apt-get install git
 ```
 ## Installing the Required Libraries
+### SciKit Learn
+`pip install scikit-learn`
 ### Cryptopgrahy
 `pip install cryptography`
 ### Pandas

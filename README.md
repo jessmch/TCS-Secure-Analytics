@@ -116,6 +116,8 @@ Start the Docker service and make sure it runs every time the instance starts up
 #### Setting up the Enclave
 In the directory to create a Docker image run
 `sudo docker build -t tcs-black-box .`
+To test if it runs, run this docker command
+`sudo docker run --rm -p 3389:3389 tcs-black-box`
 Build the enclave file
 `sudo nitro-cli build-enclave --docker-uri tcs-black-box:latest --output-file tcs-black-box.eif`
 Run the enclave file

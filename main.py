@@ -122,10 +122,11 @@ if __name__ == "__main__":
 
                         output += "Prediction Model created"
                     elif(message[0:15].lower().strip() == 'generate output'):
-                        test_csv = response = message[15:]
+                        test_csv = message[16:]
 
                         # Pre-process test data
                         # Should be in the same format as the original CSV
+                        print(f'Predicting data in {test_csv}')
                         test = pd.read_csv(test_csv)
                         test_data = test[keep_columns]
                         test_data = pd.get_dummies(test_data, drop_first=True)

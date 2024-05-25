@@ -103,8 +103,7 @@ Verify the Nitro Enclave installation
 `nitro-cli --version`
 Change the allocation settings for all Enclaves
 ```
-sudo chmod 777 /etc/nitro_enclaves/allocator.yaml
-vim /etc/nitro_enclaves/allocator.yaml
+sudo vim /etc/nitro_enclaves/allocator.yaml
 sudo systemctl restart nitro-enclaves-allocator.service
 ```
 Change memory_mib to `8000`
@@ -121,6 +120,8 @@ Build the enclave file
 `sudo nitro-cli build-enclave --docker-uri tcs-black-box:latest --output-file tcs-black-box.eif`
 Run the enclave file
 `sudo nitro-cli run-enclave --cpu-count 2 --memory 2428 --enclave-cid 16 --eif-path tcs-black-box.eif --debug-mode`
+To check running enclaves
+`nitro-cli describe-enclaves`
 
 
 ### Extra Notes

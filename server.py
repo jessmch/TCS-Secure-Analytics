@@ -28,6 +28,7 @@ if __name__ == "__main__":
 
     print('Loading training set')
     df = pd.read_csv('fraudTrain.csv')
+    #df.drop(columns=['lat', 'long', 'city_pop', 'job', 'unix_time', 'merch_lat', 'merch_long', 'Unnamed: 0','first', 'last', 'gender', 'street', 'state', 'zip', 'dob', 'trans_num','trans_date_trans_time'],inplace=True)
     df.dropna() # Drop all rows that have missing values
     print('Training set loaded')
 

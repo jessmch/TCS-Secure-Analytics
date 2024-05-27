@@ -121,7 +121,7 @@ To test if it runs, run this docker command
 Build the enclave file
 `sudo nitro-cli build-enclave --docker-uri tcs-black-box:latest --output-file tcs-black-box.eif`
 Run the enclave file
-`sudo nitro-cli run-enclave --cpu-count 2 --memory 2428 --enclave-cid 16 --eif-path tcs-black-box.eif --debug-mode`
+`sudo nitro-cli run-enclave --cpu-count 2 --memory 4096 --enclave-cid 16 --eif-path tcs-black-box.eif --debug-mode`
 To check running enclaves
 `nitro-cli describe-enclaves`
 
@@ -142,3 +142,7 @@ sudo yum install -y docker
 sudo service docker start
 sudo usermod -a -G docker ec2-user
 ```
+
+# Running the program
+Simply run `main.py` to start the main program. This will generate the MLM and LLM based on the transaction dataset.
+While it is running, run `./mem_dump.sh` to see what data it has taken from the program.

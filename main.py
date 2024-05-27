@@ -75,9 +75,9 @@ if __name__ == "__main__":
 
     # Ask the LLM some questions
     query = 'How many rows are there?'
-    print(query)
+    print('Query:', query)
     response = sdf.chat(query)
-    print(response)
+    print('Response:', response)
     print()
 
     print(f"\nResponse time: {(time.time() - start_time)} seconds")

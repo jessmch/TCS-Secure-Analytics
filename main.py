@@ -80,4 +80,8 @@ if __name__ == "__main__":
     print()
 
     print(f"\nResponse time: {(time.time() - start_time)} seconds")
+
+    # simulate long-running process for memory dump
+    time.sleep(300)
+
     print('Finishing program')

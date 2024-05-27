@@ -144,5 +144,6 @@ sudo usermod -a -G docker ec2-user
 ```
 
 # Running the program
-Simply run `main.py` to start the main program. This will generate the MLM and LLM based on the transaction dataset.
+First, run the local Ollama model using `ollama run mistral` Use the command CTRL+D to exit the interface but keep it running.
+Then, Simply run `main.py` to start the main program. This will generate the MLM and LLM based on the transaction dataset.
 While it is running, run `./mem_dump.sh` to see what data it has taken from the program.

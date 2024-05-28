@@ -2,3 +2,4 @@ fraudTest.csv
 fraudTrain.csv
 pandasai.log
 exports/*
+/cache

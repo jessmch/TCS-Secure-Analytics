@@ -1,12 +1,14 @@
 FROM amazonlinux
 
+RUN yum update
+
 # Get Python and PIP
 RUN yum install python3
 ADD https://bootstrap.pypa.io/get-pip.py /
 RUN python3 get-pip.py
 
 # Get Ollama
-RUN yum install findutils
+RUN yum install -y findutils
 RUN curl -fsSL https://ollama.com/install.sh | sh
 
 ADD run-ollama.sh /

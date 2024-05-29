@@ -73,21 +73,18 @@ if __name__ == "__main__":
     #print('Output saved to output.csv')
 
     # Ask the LLM some questions
-    query = 'How many rows are there?'
-    print('Query:', query)
-    response = sdf.chat(query)
+    print('Query:', 'How many rows are there?')
+    response = sdf.chat('How many rows are there?')
     print('Response:', response)
     print()
 
-    query = 'What is the biggest spending category?'
-    print('Query:', query)
-    response = sdf.chat(query)
+    print('Query:', 'What is the biggest spending category?')
+    response = sdf.chat('What is the biggest spending category?')
     print('Response:', response)
     print()
 
-    query = 'What is the average spending amount?'
-    print('Query:', query)
-    response = sdf.chat(query)
+    print('Query:', 'What is the average spending amount?')
+    response = sdf.chat('What is the average spending amount?')
     print('Response:', response)
     print()
 

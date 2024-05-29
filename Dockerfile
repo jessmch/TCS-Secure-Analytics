@@ -6,8 +6,11 @@ ADD https://bootstrap.pypa.io/get-pip.py /
 RUN python3 get-pip.py
 
 # Get Ollama
-RUN yum -y install findutil
+RUN yum install findutils
 RUN curl -fsSL https://ollama.com/install.sh | sh
+
+ADD run-ollama.sh /
+RUN chmod +x /run-ollama.sh
 
 COPY . .
 
@@ -16,5 +19,5 @@ ADD dependencies.sh /
 RUN chmod +x /dependencies.sh
 RUN ["/dependencies.sh"]
 
-#CMD ["ollama", "run", "mistral"]
+CMD ["./run-ollama.sh"]
 CMD ["python3", "main.py"]

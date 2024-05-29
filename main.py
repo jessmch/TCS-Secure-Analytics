@@ -74,18 +74,15 @@ if __name__ == "__main__":
 
     # Ask the LLM some questions
     print('Query:', 'How many rows are there?')
-    response = sdf.chat('How many rows are there?')
-    print('Response:', response)
+    print('Response:', sdf.chat('How many rows are there?'))
     print()
 
     print('Query:', 'What is the biggest spending category?')
-    response = sdf.chat('What is the biggest spending category?')
-    print('Response:', response)
+    print('Response:', sdf.chat('What is the biggest spending category?'))
     print()
 
     print('Query:', 'What is the average spending amount?')
-    response = sdf.chat('What is the average spending amount?')
-    print('Response:', response)
+    print('Response:', sdf.chat('What is the average spending amount?'))
     print()
 
     print(f"\nResponse time: {(time.time() - start_time)} seconds")

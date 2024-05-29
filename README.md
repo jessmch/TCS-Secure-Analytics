@@ -119,7 +119,7 @@ Go to the program's directory
 In the directory to create a Docker image run
 `sudo docker build -t tcs-black-box .`
 To test if it runs, run this docker command
-`sudo docker run --rm -it -v ollama:/root/.ollama tcs-black-box`
+`sudo docker run --rm -it tcs-black-box`
 Build the enclave file
 `sudo nitro-cli build-enclave --docker-uri tcs-black-box:latest --output-file tcs-black-box.eif`
 
@@ -165,14 +165,16 @@ In both the Google Cloud and AWS instaces, clone the Github repository
 Results from the memory dump attack show how vulnerable the data is currently
 
 ## In AWS
-1. Go to the program's directory 
+1. Run the Ollama Docker container
+`docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama`
+2. Go to the program's directory 
 `cd TCS-Secure-Analytics`
-2. Use TMUX to split the terminal in two (Run `tmux`, then use Ctrl+B and then %)
-3. In one terminal, run the Enclave file
+3. Use TMUX to split the terminal in two (Run `tmux`, then use Ctrl+B and then %)
+4. In one terminal, run the Enclave file
 `sudo nitro-cli run-enclave --cpu-count 2 --memory 9000 --enclave-cid 16 --eif-path tcs-black-box.eif --debug-mode`
 Optional: To see what the enclave is outputting, use the enclave ID returned from the command above in this command
 `nitro-cli console --enclave-id <ENCLAVE ID HERE>`
-4. In the other terminal, run the memory dump attack
+5. In the other terminal, run the memory dump attack
 ```
 chmod +x mem_dump_aws.sh
 ./mem_dump_aws.sh

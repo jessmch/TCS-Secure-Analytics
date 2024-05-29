@@ -7,7 +7,7 @@ RUN python3 get-pip.py
 
 # Get Ollama
 RUN yum -y install findutil
-curl -fsSL https://ollama.com/install.sh | sh
+RUN curl -fsSL https://ollama.com/install.sh | sh
 
 COPY . .
 

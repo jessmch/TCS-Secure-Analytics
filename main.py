@@ -79,6 +79,18 @@ if __name__ == "__main__":
     print('Response:', response)
     print()
 
+    query = 'What is the biggest spending category?'
+    print('Query:', query)
+    response = sdf.chat(query)
+    print('Response:', response)
+    print()
+
+    query = 'What is the average spending amount?'
+    print('Query:', query)
+    response = sdf.chat(query)
+    print('Response:', response)
+    print()
+
     print(f"\nResponse time: {(time.time() - start_time)} seconds")
 
     # simulate long-running process for memory dump
